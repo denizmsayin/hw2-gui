@@ -7,6 +7,8 @@ module Expression (
     Repr(..)
     ) where
 
+-- do not modify this file! the whole homework is based on these data definitions
+
 data UnaryOperator = Minus deriving (Eq, Read, Show)
 data BinaryOperator = Plus | Times deriving (Eq, Read, Show)
 

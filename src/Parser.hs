@@ -7,6 +7,38 @@ import Data.List
 import Expression
 import Tokenizer
 
+-- a very simple parser for the tokens that uses the shunting yard algorithm 
+
+-- what's a parser? as said in the Tokenizer module,
+-- compilation is performed in multiple steps. the second step
+-- is parsing, which takes the previously generated tokens as input
+-- and tries to derive the ordering of tokens from the language rules
+-- (usually PLs are context-free grammars which you study in CENG280)
+-- this is useful as a first step for structuring the abstract syntax tree
+-- which contains semantic information about the program, as well as for
+-- making sure that the program obeys the language's syntax rules.
+-- examples:
+-- tokens: id("myvar"),plus,id("x")
+-- parse tree: + -- myvar
+--               |- x
+-- tokens: id("a"),plus,plus,id("b")
+-- parse tree: error! plus followed by plus is invalid
+-- 
+-- note that parsing deals with the structural validity of the program, but not
+-- the logical/semantic validity. for example, in C, the following program
+-- would be syntatically valid (it obeys the grammar), but semantically invalid
+-- due to redefinition:
+-- int main() {
+--     int x;
+--     char x;
+--     return 0;
+-- }
+-- 
+-- in our simple case the parser is used to directly construct an expression tree from
+-- the input tokens. 
+
+-- feel free to modify this file but remember that it will not be used in grading!
+
 parse :: String -> ExprV
 parse string =
     if null string

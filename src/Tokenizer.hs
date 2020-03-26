@@ -9,17 +9,19 @@ import Expression
 
 -- a very simple tokenizer/lexer for the input
 
--- What's a tokenizer? As some of you might be familiar with,
--- compilation is performed in multiple steps. The first step,
+-- what's a tokenizer? as some of you might be familiar with,
+-- compilation is performed in multiple steps. the first step,
 -- although it is sometimes also considered together with the
 -- second step (parsing) since they are tightly coupled, is tokenization. 
--- In this part, groups of characters are bunched up together to 
+-- in this part, groups of characters are bunched up together to 
 -- create single entities, which abstracts over character sequences 
--- quite nicely. Example:
--- Input: myvar+x->y
--- Sequence: 'm','y','v','a','r','+','x','-','>','y'
--- Tokenized: Id("myvar"),Plus,Id("x"),Rightarrow,Id("y")
+-- quite nicely. example:
+-- input: myvar+x->y
+-- sequence: 'm','y','v','a','r','+','x','-','>','y'
+-- tokenized: id("myvar"),plus,id("x"),rightarrow,id("y")
 -- ... which representation do you think would be easier to work with?
+
+-- feel free to modify this file but remember that it will not be used in grading!
 
 data Token = Id String
            | Literal String
