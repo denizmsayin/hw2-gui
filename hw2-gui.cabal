@@ -1,0 +1,53 @@
+name : hw2-gui 
+version : 0.0.0.1
+synopsis : GUI for Haskell HW2 
+description:
+    a GUI for visualizing expression trees in 
+    CENG242 - 20192 homework 2
+    derived from Aditya Siram's fltkhs-hello-world
+    template project file 
+license : MIT
+license-file : LICENSE
+author : Deniz Sayın
+build-type: Custom
+maintainer: sayin@ceng.metu.edu.tr
+homepage: 
+category: UI,Graphics,Homework
+cabal-version: >=2.0
+
+custom-setup
+  setup-depends:
+      Cabal >=2.4.0.0 && <4
+    , base >=4.4
+    , filepath
+
+Flag FastCompile
+   Description: Turn off optimizations for faster compilation
+   Manual: False
+   Default: True
+
+Executable hw2-gui 
+  main-is: Main.hs
+  hs-source-dirs: app/, src/
+  other-modules:
+    Geom2D, Drawing, Settings, Utils, Image, Expression, Tokenizer, Parser, HW2
+  Build-Depends:
+    base == 4.*,
+    fltkhs >= 0.8.0.3,
+    text >= 1.2.2.0,
+    fclabels >= 2.0.4,
+    bytestring >= 0.10.10.0,
+    JuicyPixels >= 3.3.5
+  default-language: Haskell2010
+  ghc-Options: -Wall -threaded
+  -- if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
+  if flag(FastCompile)
+     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  else
+     ghc-Options: -O2
+  if os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+  if os(darwin)
+   ghc-Options: "-optl-Wl,-lfltkc"
+  if !os(darwin) && !os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"

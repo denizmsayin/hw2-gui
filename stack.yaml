@@ -1,0 +1,15 @@
+flags: {}
+resolver: lts-15.0
+packages:
+- .
+extra-deps:
+- fltkhs-0.8.0.3
+- fclabels-2.0.4
+- JuicyPixels-3.3.5
+
+nix:
+  packages:
+    - autoconf
+    - pkgconfig
+    - xorg.libX11
+    - xorg.libXft
